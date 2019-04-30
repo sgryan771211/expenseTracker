@@ -1,20 +1,20 @@
 const express = require('express')
 const router = express.Router()
 const Record = require('../models/record')
-
+const { authenticated } = require('../config/auth')
 
 // 列出全部 record
-router.get('/', (req, res) => {
+router.get('/', authenticated, (req, res) => {
   res.send('列出所有 record')
 })
 
 // 新增一筆 record 頁面
-router.get('/new', (req, res) => {
+router.get('/new', authenticated, (req, res) => {
   res.render('new')
 })
 
 // 新增一筆  record
-router.post('/', (req, res) => {
+router.post('/', authenticated, (req, res) => {
   const record = Record({
     name: req.body.name,
     category: req.body.category,
@@ -29,7 +29,7 @@ router.post('/', (req, res) => {
 })
 
 // 修改 record 頁面
-router.get('/:id/edit', (req, res) => {
+router.get('/:id/edit', authenticated, (req, res) => {
   Record.findById(req.params.id, (err, record) => {
     if (err) return console.error(err)
     return res.render('edit', { record: record })
@@ -37,7 +37,7 @@ router.get('/:id/edit', (req, res) => {
 })
 
 // 修改 record
-router.put('/:id', (req, res) => {
+router.put('/:id', authenticated, (req, res) => {
   Record.findById(req.params.id, (err, record) => {
     if (err) return console.error(err)
     record.name = req.body.name
@@ -53,7 +53,7 @@ router.put('/:id', (req, res) => {
 })
 
 // 刪除 record
-router.delete('/:id/delete', (req, res) => {
+router.delete('/:id/delete', authenticated, (req, res) => {
   Record.findById(req.params.id, (err, record) => {
     if (err) return console.error(err)
     record.remove(err => {
