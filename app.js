@@ -30,6 +30,7 @@ const Record = require('./models/record');
 // 載入路由器
 app.use('/', require('./routes/home'))
 app.use('/record', require('./routes/record'))
+app.use('/users', require('./routes/user'))
 
 app.listen(3000, () => {
   console.log('App is running!')
