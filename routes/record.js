@@ -10,17 +10,22 @@ router.get('/', (req, res) => {
 
 // 新增一筆 record 頁面
 router.get('/new', (req, res) => {
-  res.send('新增 record 頁面')
-})
-
-// 顯示一筆 record 的詳細內容
-router.get('/:id', (req, res) => {
-  res.send('顯示 record 的詳細內容')
+  res.render('new')
 })
 
 // 新增一筆  record
 router.post('/', (req, res) => {
-  res.send('建立 record')
+  const record = Record({
+    name: req.body.name,
+    category: req.body.category,
+    date: req.body.date,
+    amount: req.body.amount,
+  })
+
+  record.save(err => {
+    if (err) return console.error(err)
+    return res.redirect('/')
+  })
 })
 
 // 修改 record 頁面
