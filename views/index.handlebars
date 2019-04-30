@@ -1,1 +1,10 @@
-<h2>hello world! 這是 index</h2>
+<ul>
+  {{#each records}}
+  <li>
+    {{{this.name}}}
+    <a href="#">修改</a>
+    <button type="submit">刪除</button>
+  </li>
+  {{/each}}
+</ul>
+<a href="/record/new">新增支出</a>
