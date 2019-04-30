@@ -7,7 +7,7 @@ const methodOverride = require('method-override')
 const session = require('express-session')
 const passport = require('passport')
 
-mongoose.connect('mongodb://localhost/expenseTracker', { useNewUrlParser: true })
+mongoose.connect('mongodb://localhost/expenseTracker', { useNewUrlParser: true, useCreateIndex: true })
 
 const db = mongoose.connection
 
@@ -17,7 +17,9 @@ app.use(bodyParser.urlencoded({ extended: true }))
 app.use(methodOverride('_method'))
 
 app.use(session({
-  secret: 'rsjdtkuyliuflif'
+  secret: 'rsjdtkuyliuflif',
+  resave: 'false',
+  saveUninitialized: 'false',
 }))
 
 app.use(passport.initialize())
