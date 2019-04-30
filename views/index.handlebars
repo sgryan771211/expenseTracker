@@ -2,7 +2,7 @@
   {{#each records}}
   <li>
     {{{this.name}}}
-    <a href="#">修改</a>
+    <a href="/record/{{{this.id}}}/edit">修改</a>
     <button type="submit">刪除</button>
   </li>
   {{/each}}

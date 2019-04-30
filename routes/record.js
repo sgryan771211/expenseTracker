@@ -30,12 +30,26 @@ router.post('/', (req, res) => {
 
 // 修改 record 頁面
 router.get('/:id/edit', (req, res) => {
-  res.send('修改 record 頁面')
+  Record.findById(req.params.id, (err, record) => {
+    if (err) return console.error(err)
+    return res.render('edit', { record: record })
+  })
 })
 
 // 修改 record
 router.post('/:id', (req, res) => {
-  res.send('修改 record')
+  Record.findById(req.params.id, (err, record) => {
+    if (err) return console.error(err)
+    record.name = req.body.name
+    record.category = req.body.category
+    record.date = req.body.date
+    record.amount = req.body.amount
+
+    record.save(err => {
+      if (err) return console.error(err)
+      return res.redirect(`/`)
+    })
+  })
 })
 
 // 刪除 record
