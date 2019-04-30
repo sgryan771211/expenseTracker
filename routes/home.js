@@ -4,7 +4,7 @@ const Record = require('../models/record')
 
 // record 首頁
 router.get('/', (req, res) => {
-  res.send('hello')
+  return res.render('index')
 })
 
 module.exports = router
