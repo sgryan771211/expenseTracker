@@ -3,7 +3,9 @@
   <li>
     {{{this.name}}}
     <a href="/record/{{{this.id}}}/edit">修改</a>
-    <button type="submit">刪除</button>
+    <form action="/record/{{{this.id}}}/delete" method="POST">
+      <button type="submit">刪除</button>
+    </form>
   </li>
   {{/each}}
 </ul>
