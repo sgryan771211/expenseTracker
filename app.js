@@ -19,9 +19,9 @@ db.once('open', () => {
 // 載入 Record model
 const Record = require('./models/record');
 
-app.get('/', (req, res) => {
-  res.send('hello world!')
-})
+// 載入路由器
+app.use('/', require('./routes/home'))
+app.use('/record', require('./routes/record'))
 
 app.listen(3000, () => {
   console.log('App is running!')
