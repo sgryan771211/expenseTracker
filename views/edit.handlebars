@@ -1,7 +1,14 @@
 <form action="/record/{{{record.id}}}?_method=PUT" method="POST">
   <input type="text" placeholder="name" name="name" value="{{{record.name}}}">
-  <input type="text" placeholder="date" name="date" value="{{{record.date}}}">
-  <input type="text" placeholder="category" name="category" value="{{{record.category}}}">
+  <input type="date" placeholder="date" name="date" value="{{{record.date}}}">
+  {{!-- <input type="text" placeholder="category" name="category" value="{{{record.category}}}"> --}}
+  <select type="text" name="category">
+    <option>home</option>
+    <option>traffic</option>
+    <option>entertainment</option>
+    <option>food</option>
+    <option>other</option>
+  </select>
   <input type="text" placeholder="amount" name="amount" value="{{{record.amount}}}">
   <button type="submit">送出</button>
 </form>
