@@ -3,6 +3,7 @@ const app = express();
 const mongoose = require('mongoose')
 const exphbs = require('express-handlebars')
 const bodyParser = require('body-parser')
+const methodOverride = require('method-override')
 
 mongoose.connect('mongodb://localhost/expenseTracker', { useNewUrlParser: true })
 
@@ -11,6 +12,7 @@ const db = mongoose.connection
 app.engine('handlebars', exphbs({ defaultLayout: 'main' }))
 app.set('view engine', 'handlebars')
 app.use(bodyParser.urlencoded({ extended: true }))
+app.use(methodOverride('_method'))
 
 // 連線異常
 db.on('error', () => {
