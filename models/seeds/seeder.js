@@ -3,7 +3,7 @@ const Record = require('../record')
 const bcrypt = require('bcryptjs')
 const User = require('../user')
 
-mongoose.connect('mongodb://localhost/expenseTracker', { useNewUrlParser: true, useCreateIndex: true })
+mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/expenseTracker', { useNewUrlParser: true, useCreateIndex: true })
 
 const db = mongoose.connection
 

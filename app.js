@@ -13,7 +13,7 @@ if (process.env.NODE_ENV !== 'production') {
   require('dotenv').config()
 }
 
-mongoose.connect('mongodb://localhost/expenseTracker', { useNewUrlParser: true, useCreateIndex: true })
+mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/expenseTracker', { useNewUrlParser: true, useCreateIndex: true })
 
 const db = mongoose.connection
 
@@ -61,6 +61,6 @@ app.use('/users', require('./routes/user'))
 app.use('/auth', require('./routes/auths'))
 app.use('/filter', require('./routes/filter'))
 
-app.listen(3000, () => {
+app.listen(process.env.MONGODB_URI || 3000, () => {
   console.log('App is running!')
 })
