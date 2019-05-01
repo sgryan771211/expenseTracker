@@ -15,18 +15,33 @@ router.get('/new', authenticated, (req, res) => {
 
 // 新增一筆  record
 router.post('/', authenticated, (req, res) => {
-  const record = Record({
-    name: req.body.name,
-    category: req.body.category,
-    date: req.body.date,
-    amount: req.body.amount,
-    userId: req.user._id,
-  })
+  let errors = []
+  if (!req.body.name || !req.body.category || !req.body.date || !req.body.amount) {
+    errors.push({ message: '新增失敗，所有欄位都是必填' })
+  }
+  if (errors.length > 0) {
+    Record.find({ userId: req.user._id }, (err, records) => {
+      if (err) return console.error(err)
+      let totalAmount = 0
+      for (record of records) {
+        totalAmount += record.amount
+      }
+      return res.render('index', { errors, records: records, totalAmount: totalAmount })
+    })
+  } else {
+    const record = Record({
+      name: req.body.name,
+      category: req.body.category,
+      date: req.body.date,
+      amount: req.body.amount,
+      userId: req.user._id,
+    })
 
-  record.save(err => {
-    if (err) return console.error(err)
-    return res.redirect('/')
-  })
+    record.save(err => {
+      if (err) return console.error(err)
+      return res.redirect('/')
+    })
+  }
 })
 
 // 修改 record 頁面

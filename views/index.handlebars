@@ -42,8 +42,12 @@
         </div>
       </div>
 
-      <h1>總金額:</h1>
-      <h1>{{totalAmount}}</h1>
+      <div class="message text-center mt-4">
+        {{> messages}}
+      </div>
+
+      <h1>總金額:{{totalAmount}}</h1>
+
 
       {{#each records}}
       <div class="media text-muted pt-3">
