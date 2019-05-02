@@ -61,6 +61,6 @@ app.use('/users', require('./routes/user'))
 app.use('/auth', require('./routes/auths'))
 app.use('/filter', require('./routes/filter'))
 
-app.listen(process.env.MONGODB_URI || 3000, () => {
+app.listen(process.env.PORT || 3000, () => {
   console.log('App is running!')
 })
